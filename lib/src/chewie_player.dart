@@ -157,6 +157,7 @@ class ChewieController extends ChangeNotifier {
     this.overlay,
     this.showControls = true,
     this.customControls,
+    this.errorBuilder,
     this.allowedScreenSleep = true,
     this.isLive = false,
     this.allowFullScreen = true,
@@ -195,6 +196,10 @@ class ChewieController extends ChangeNotifier {
   /// [CupertinoControls] for reference.
   final Widget customControls;
 
+  /// When the video playback runs  into an error, you can build a custom
+  /// error message.
+  final Widget Function(BuildContext context, String errorMessage) errorBuilder;
+
   /// The Aspect Ratio of the Video. Important to get the correct size of the
   /// video!
   ///
@@ -215,7 +220,6 @@ class ChewieController extends ChangeNotifier {
 
   /// A widget which is placed between the video and the controls
   final Widget overlay;
-
 
   /// Defines if the player will start in fullscreen when play is pressed
   final bool fullScreenByDefault;
@@ -240,7 +244,8 @@ class ChewieController extends ChangeNotifier {
 
   static ChewieController of(BuildContext context) {
     final _ChewieControllerProvider chewieControllerProvider =
-        context.inheritFromWidgetOfExactType(_ChewieControllerProvider);
+        context.inheritFromWidgetOfExactType(_ChewieControllerProvider)
+            as _ChewieControllerProvider;
 
     return chewieControllerProvider.controller;
   }
