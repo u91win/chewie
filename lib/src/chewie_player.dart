@@ -65,7 +65,7 @@ class ChewieState extends State<Chewie> {
   Widget build(BuildContext context) {
     return _ChewieControllerProvider(
       controller: widget.controller,
-      child: PlayerWithControls(),
+      child: PlayerWithControls(title: widget.controller.title,),
     );
   }
 
@@ -78,7 +78,7 @@ class ChewieState extends State<Chewie> {
         color: Colors.black,
         child: _ChewieControllerProvider(
           controller: widget.controller,
-          child: PlayerWithControls(),
+          child: PlayerWithControls(title: widget.controller.title,),
         ),
       ),
     );
@@ -144,6 +144,7 @@ class ChewieState extends State<Chewie> {
 /// `VideoPlayerController`.
 class ChewieController extends ChangeNotifier {
   ChewieController({
+    this.title ,
     this.videoPlayerController,
     this.aspectRatio,
     this.autoInitialize = false,
@@ -172,6 +173,8 @@ class ChewieController extends ChangeNotifier {
             'You must provide a controller to play a video') {
     _initialize();
   }
+
+  final String title;
 
   /// The controller for the video you want to play
   final VideoPlayerController videoPlayerController;

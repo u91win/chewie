@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayerWithControls extends StatelessWidget {
-  PlayerWithControls({Key key}) : super(key: key);
+  PlayerWithControls({Key key, this.title}) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class PlayerWithControls extends StatelessWidget {
         ? chewieController.customControls != null
             ? chewieController.customControls
             : Theme.of(context).platform == TargetPlatform.android
-                ? MaterialControls()
+                ? MaterialControls(title: title)
                 : CupertinoControls(
                     backgroundColor: Color.fromRGBO(41, 41, 41, 0.7),
                     iconColor: Color.fromARGB(255, 200, 200, 200),
